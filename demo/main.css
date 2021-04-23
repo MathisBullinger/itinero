@@ -1,0 +1,60 @@
+:root {
+  font-family: monospace;
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+.home {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.screen {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.card {
+  width: 50vw;
+  height: 50vh;
+  flex-shrink: 0;
+  font-size: 10vmin;
+  color: #fff;
+  text-align: center;
+  line-height: 50vh;
+  text-transform: uppercase;
+}
+
+.back {
+  display: block;
+  width: 100vw;
+  height: 3rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.back ~ .screen {
+  min-height: calc(100vh - 3rem);
+}
+
+.cl-a {
+  background-color: #3f51b5;
+}
+.cl-b {
+  background-color: #ff9800;
+}
+.cl-c {
+  background-color: #4caf50;
+}
+.cl-d {
+  background-color: #f44336;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
