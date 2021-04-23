@@ -1,0 +1,4 @@
+node_modules
+lib
+demo/.cache
+demo/dist
