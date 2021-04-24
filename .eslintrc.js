@@ -1,8 +1,6 @@
 module.exports = {
   root: true,
   extends: [
-    'react-app',
-    'react-app/jest',
     'eslint:recommended',
     'prettier',
     'plugin:@typescript-eslint/recommended',
@@ -25,5 +23,6 @@ module.exports = {
     'no-console': 'error',
     '@typescript-eslint/no-extra-semi': 'off',
     'semi-style': ['error', 'first'],
+    '@typescript-eslint/ban-types': ['warn', { types: { '{}': false } }],
   },
 }
