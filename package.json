@@ -1,21 +1,29 @@
 {
-  "name": "router",
+  "name": "@picast-app/router",
   "version": "0.0.1",
+  "private": "true",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.json && cp package.json lib",
     "start:demo": "npm run build && parcel demo/index.html -d demo/dist --cache-dir demo/.cache",
-    "build:demo": "npm run build && npm i react react-dom && cd demo && npx parcel build index.html"
+    "build:demo": "npm run build && npm i react react-dom && cd demo && npx parcel build index.html",
+    "prepare": "npm run build",
+    "postversion": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MathisBullinger/router.git"
+    "url": "https://github.com/picast-app/router.git"
   },
   "author": "Mathis Bullinger",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MathisBullinger/router/issues"
+    "url": "https://github.com/picast-app/router/issues"
   },
-  "homepage": "https://github.com/MathisBullinger/router#readme",
+  "homepage": "https://github.com/picast-app/router#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/picast-app"
+  },
   "peerDependencies": {
     "react": ">=16.8.0"
   },
