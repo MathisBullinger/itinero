@@ -1,19 +1,22 @@
-import React from 'react'
-import { matches } from './match'
+import React, { useState } from 'react'
+import { matchPath, toRegex } from './match'
 import { useLocation } from './hooks'
 import type { Location } from './location'
 
 type Props = {
-  path: RegExp
-  match?: boolean
+  path: RegExp | string
+  match?: RegExpExecArray
 }
 
-const Route: React.FC<Props> = ({ match, children, ...props }) => {
+const Route: React.FC<Props> = ({ match, path, children }) => {
+  const [regex] = useState(typeof path === 'string' ? toRegex(path) : path)
   const location = useLocation()
-  if (!children || (!match && !matches(props, location))) return null
-  if (!Array.isArray(children)) return renderChild(children, { location })
+  const v = children && (match ?? matchPath(regex, location))
+  if (!v) return null
+  const props = { location, match: v.groups ?? {} }
+  if (!Array.isArray(children)) return renderChild(children, props)
   return (children as any[]).map((child, key) =>
-    renderChild(child, { key, location })
+    renderChild(child, { key, ...props })
   )
 }
 
@@ -22,6 +25,10 @@ const renderChild = (child: any, props?: any) =>
 
 export default Route
 
-export type RouteProps<T extends Record<string, any> = {}> = T & {
+export type RouteProps<
+  T extends Record<string, any> = {},
+  TM extends Record<string, string> = any
+> = T & {
   location: Location
+  match: TM
 }

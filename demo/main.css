@@ -16,6 +16,17 @@ body {
 .screen {
   width: 100vw;
   min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.screen > h1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: brightness(300%) saturate(50%);
+  padding: 1rem;
 }
 
 .card {

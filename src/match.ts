@@ -1,6 +1,6 @@
 import { Location } from './location'
 
-type MatchOpts = { path: RegExp }
+export const matchPath = (pattern: RegExp | string, location: Location) =>
+  (pattern instanceof RegExp ? pattern : toRegex(pattern)).exec(location.path)
 
-export const matches = ({ path }: MatchOpts, location: Location): boolean =>
-  path?.test(location.path)
+export const toRegex = (matcher: string): RegExp => new RegExp(`^${matcher}$`)

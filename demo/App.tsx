@@ -6,17 +6,19 @@ import './main.css'
 function App() {
   return (
     <>
-      <Route path={/^\/(?!$)/}>
+      <Route path="/.">
         <Link to="/" className="back">
           /
         </Link>
       </Route>
       <Switch>
-        <Route path={/^\/$/}>{Home}</Route>
-        <Route path={/^\/[a-d]$/}>{Alpha}</Route>
-        <Route path={/foo/}>
+        <Route path="/">{Home}</Route>
+        <Route path="/[a-d]">{Alpha}</Route>
+        <Route path="/foo">
           <Foo>bar</Foo>
         </Route>
+        <Route path="/rgb/(?<r>\d+)/(?<g>\d+)/(?<b>\d+)">{Color}</Route>
+        <Route path=".*">404</Route>
       </Switch>
     </>
   )
@@ -39,6 +41,15 @@ const Alpha: React.FC<RouteProps> = ({ location }) => {
   const char = location.path.slice(1)
   console.log('alpha', char)
   return <div className={`screen cl-${char}`}>{char}</div>
+}
+
+const Color: React.FC<RouteProps> = ({ match: { r, g, b } }) => {
+  const backgroundColor = `rgb(${r},${g},${b})`
+  return (
+    <div className="screen" style={{ backgroundColor }}>
+      <h1>{backgroundColor}</h1>
+    </div>
+  )
 }
 
 function Foo({ children }: { children?: string }) {
