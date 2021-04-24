@@ -26,10 +26,13 @@ describe('toRegex', () => {
 })
 
 describe('named groups shorthand', () => {
-  testConvert('path/:id', `path/(?<id>${classes.param}+)`, subNamed)
+  testConvert('path/:id', `path(?:\\/(?<id>${classes.param}+))`, subNamed)
+  testConvert('path/:id?', `path(?:\\/(?<id>${classes.param}+))?`, subNamed)
 
   testAccepts(toRegex('/path/:id'), '/path', false)
+  testAccepts(toRegex('/path/:id?'), '/path', true)
   testAccepts(toRegex('/path/:id'), '/path/foo', true)
+  testAccepts(toRegex('/path/:id?'), '/path/foo', true)
 
   test('returns group', () => {
     expect(

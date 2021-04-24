@@ -9,7 +9,7 @@ export const toRegex = (matcher: string): RegExp =>
   new RegExp(`^${subNamed(matcher.replace(/\/$/, ''))}/?$`, 'i')
 
 export const subNamed = (v: string): string =>
-  v.replace(/(:([a-z_]\w*))/g, `(?<$2>${classes.param}+)`)
+  v.replace(/(\/:([a-z_]\w*))/g, `(?:\\/(?<$2>${classes.param}+))`)
 
 export const classes = {
   param: '\\w',
