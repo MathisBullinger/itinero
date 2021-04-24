@@ -1,8 +1,15 @@
 import * as loc from './location'
 
-export const push = (location: string | Partial<Location>) => {
+type PushOpts = {
+  replace?: boolean
+}
+
+export const push = (
+  location: string | Partial<Location>,
+  { replace }: PushOpts = {}
+) => {
   loc.update(typeof location === 'string' ? loc.parse(location) : location)
-  history.pushState(null, '', loc.stringify())
+  history[replace ? 'replaceState' : 'pushState'](null, '', loc.stringify())
 }
 
 window.addEventListener('popstate', () => {

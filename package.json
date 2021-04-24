@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "rm -rf lib && tsc -p tsconfig.json && cp package.json lib",
+    "build": "rm -rf lib && tsc -p tsconfig.json && cp package.json lib && rm lib/*.spec.*",
     "test": "jest",
     "start:demo": "npm run build && parcel demo/index.html -d demo/dist --cache-dir demo/.cache",
     "build:demo": "npm run build && npm i react react-dom && cd demo && npx parcel build index.html",
