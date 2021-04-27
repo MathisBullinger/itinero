@@ -1,3 +1,5 @@
+import type SearchParams from './url/searchParams'
+
 export type Location = {
   path: string
   hash: string
@@ -16,16 +18,17 @@ export default location
 
 export type LocationInput = Partial<
   Omit<Location, 'search'> & {
-    search: string | URLSearchParams
+    search: string | SearchParams
   }
 >
 
 export const update = (loc: LocationInput) => {
   loc = nonEmpty(loc)
-  if (loc.search instanceof URLSearchParams) loc.search = loc.search.toString()
+  if (typeof loc.search === 'object') loc.search = loc.search.toString()
   prefix(loc, 'path', '/')
-  prefix(loc, 'search', '?')
   prefix(loc, 'hash', '#')
+  if (loc.search) prefix(loc, 'search', '?')
+  loc.previous = stringify(location)
   Object.assign(location, loc)
   for (const { cb } of listeners) cb()
 }
