@@ -17,7 +17,9 @@ export const back = () => {
 }
 
 window.addEventListener('popstate', () => {
-  loc.update(
-    loc.parse(window.location.href.slice(window.location.origin.length))
-  )
+  loc.update({
+    search: '',
+    hash: '',
+    ...loc.parse(window.location.href.slice(window.location.origin.length)),
+  })
 })
