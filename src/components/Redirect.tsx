@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react'
-import * as history from './history'
+import * as history from '../history'
 
 export default ({ to }: { to: string }) => {
   useLayoutEffect(() => {

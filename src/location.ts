@@ -2,21 +2,37 @@ export type Location = {
   path: string
   hash: string
   search: string
+  previous: null | string
 }
 
 const location: Location = {
   path: window.location.pathname || '/',
   hash: window.location.hash,
   search: window.location.search,
+  previous: null,
 }
 
 export default location
 
-export const update = (loc: Partial<Location>) => {
+export type LocationInput = Partial<
+  Omit<Location, 'search'> & {
+    search: string | URLSearchParams
+  }
+>
+
+export const update = (loc: LocationInput) => {
   loc = nonEmpty(loc)
-  if ('path' in loc && !loc.path!.startsWith('/')) loc.path = '/' + loc.path
+  if (loc.search instanceof URLSearchParams) loc.search = loc.search.toString()
+  prefix(loc, 'path', '/')
+  prefix(loc, 'search', '?')
+  prefix(loc, 'hash', '#')
   Object.assign(location, loc)
   for (const { cb } of listeners) cb()
+}
+
+const prefix = <T>(obj: T, key: keyof T, prefix: string) => {
+  if (typeof obj[key] === 'string' && !(obj[key] as any).startsWith(prefix))
+    obj[key] = (prefix + obj[key]) as any
 }
 
 export const parse = (url: string): Partial<Location> => {

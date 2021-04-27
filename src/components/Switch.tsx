@@ -1,6 +1,6 @@
 import React from 'react'
-import { matchPath } from './match'
-import { useLocation } from './hooks'
+import { matchPath } from '../match'
+import { useLocation } from '../hooks'
 import Redirect from './Redirect'
 
 const Switch: React.FC<{}> = ({ children }) => {

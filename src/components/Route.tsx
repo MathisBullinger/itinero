@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { matchPath, toRegex } from './match'
-import { useLocation } from './hooks'
-import type { Location } from './location'
+import { matchPath, toRegex } from '../match'
+import { useLocation } from '../hooks'
+import type { Location } from '../location'
 
 type Props = {
   path: RegExp | string
@@ -21,7 +21,10 @@ const Route: React.FC<Props> = ({ match, path, children }) => {
 }
 
 const renderChild = (child: any, props?: any) =>
-  typeof child === 'function' ? React.createElement(child, props) : child
+  typeof child === 'function' ||
+  (typeof child === 'object' && !React.isValidElement(child))
+    ? React.createElement(child, props)
+    : child
 
 export default Route
 

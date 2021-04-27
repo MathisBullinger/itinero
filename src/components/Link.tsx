@@ -1,5 +1,5 @@
 import React from 'react'
-import * as history from './history'
+import * as history from '../history'
 
 type Props = {
   to: string
