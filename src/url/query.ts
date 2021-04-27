@@ -1,3 +1,5 @@
+export type ParamObj = Record<string, string | number | undefined | null>
+
 export const merge = (
   a: string | URLSearchParams | ParamObj,
   b: string | URLSearchParams | ParamObj = location.search
@@ -9,5 +11,3 @@ export const merge = (
 
 const cloneParams = (v: string | URLSearchParams | ParamObj) =>
   new URLSearchParams(v as any)
-
-type ParamObj = Record<string, string | number | undefined | null>
