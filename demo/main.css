@@ -52,6 +52,11 @@ body {
   color: #000;
 }
 
+.bar.small {
+  font-size: 2rem;
+  text-transform: unset;
+}
+
 .back {
   display: block;
   width: 100vw;
@@ -80,4 +85,35 @@ body {
 a {
   text-decoration: none;
   color: #000;
+}
+
+.overlay {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0005;
+}
+
+.overlay::after {
+  content: '';
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  left: 25vw;
+  top: 25vh;
+  width: 50vw;
+  height: 50vh;
+}
+
+.overlay > span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  z-index: 1;
 }

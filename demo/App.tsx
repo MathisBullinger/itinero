@@ -15,7 +15,7 @@ function App() {
         <Route path="/">{Home}</Route>
         <Route path="/[a-d]">{Alpha}</Route>
         <Route path="/foo">
-          <Foo>bar</Foo>
+          <div className="screen">foo</div>
         </Route>
         <Route path="/rgb[/(](?<r>\d+)[/,](?<g>\d+)[/,](?<b>\d+)\)?">
           {Color}
@@ -23,6 +23,17 @@ function App() {
         <Route path="/sub/:page?">{Nested}</Route>
         <Route path=".*">404</Route>
       </Switch>
+      <Route path="?overlay">
+        <div className="overlay" />
+      </Route>
+      <Route path="/sub/:page?/?colou?r=(red|green|blue)">
+        {ColoredOverlay}
+      </Route>
+      <Route path="?(john|jane)=doe\w*&age=\d{1,3}(&|$)">
+        <div className="overlay">
+          <span>multi param match</span>
+        </div>
+      </Route>
     </>
   )
 }
@@ -37,6 +48,15 @@ function Home() {
       ))}
       <Link className="bar" to="sub">
         nested
+      </Link>
+      <Link className="bar" to="?overlay">
+        ?overlay
+      </Link>
+      <Link className="bar small" to="/sub?color=red">
+        /sub/:page?/?colou?r=(red|green|blue)
+      </Link>
+      <Link className="bar small" to="?Jane=Doe&age=50">
+        {'?(john|jane)=doe\\w*&age=d{1,3}(&|$)'}
       </Link>
     </div>
   )
@@ -54,10 +74,6 @@ const Color: React.FC<RouteProps> = ({ match: { r, g, b } }) => {
       <h1>{backgroundColor}</h1>
     </div>
   )
-}
-
-function Foo({ children }: { children?: string }) {
-  return <div>foo {children}</div>
 }
 
 const Nested: React.FC<RouteProps> = ({ match }) => {
@@ -94,5 +110,16 @@ const NestedMain = () => (
     </li>
   </ul>
 )
+
+const ColoredOverlay: React.FC<RouteProps> = ({ query }) => {
+  return (
+    <div
+      className="overlay"
+      style={{ color: (query.color ?? query.colour) as string }}
+    >
+      <span>color</span>
+    </div>
+  )
+}
 
 ReactDOM.render(<App />, document.getElementById('root'))
