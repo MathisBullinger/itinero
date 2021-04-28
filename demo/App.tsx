@@ -30,9 +30,9 @@ function App() {
         {ColoredOverlay}
       </Route>
       <Route path="?(john|jane)=doe\w*&age=\d{1,3}(&|$)">
-        <div className="overlay">
+        <Link className="overlay" to="/">
           <span>multi param match</span>
-        </div>
+        </Link>
       </Route>
     </>
   )

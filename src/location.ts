@@ -24,6 +24,8 @@ export type LocationInput = Partial<
 
 export const update = (loc: LocationInput) => {
   loc = nonEmpty(loc)
+  loc.search ??= ''
+  loc.hash ??= ''
   if (typeof loc.search === 'object') loc.search = loc.search.toString()
   prefix(loc, 'path', '/')
   prefix(loc, 'hash', '#')
@@ -34,7 +36,11 @@ export const update = (loc: LocationInput) => {
 }
 
 const prefix = <T>(obj: T, key: keyof T, prefix: string) => {
-  if (typeof obj[key] === 'string' && !(obj[key] as any).startsWith(prefix))
+  if (
+    typeof obj[key] === 'string' &&
+    (obj[key] as any).length &&
+    !(obj[key] as any).startsWith(prefix)
+  )
     obj[key] = (prefix + obj[key]) as any
 }
 
@@ -55,9 +61,7 @@ export const stringify = ({
   (path || '/') + (search || '') + (hash || '')
 
 const nonEmpty = (obj: any) =>
-  Object.fromEntries(
-    Object.entries(obj).filter(([, v]) => v !== undefined && v !== '')
-  )
+  Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined))
 
 type Listener = { cb(): any }
 const listeners: Listener[] = []
