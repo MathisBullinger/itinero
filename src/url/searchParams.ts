@@ -14,13 +14,14 @@ export default class SearchParams {
           typeof v === 'object' && v !== null ? JSON.stringify(v) : v,
         ])
       )
-    else
+    else if (from)
       this.content = Object.fromEntries(
         [...new URLSearchParams(from as any).entries()].map(([k, v]) => [
           k,
           SearchParams.parseValue(v),
         ])
       )
+    else this.content = {}
   }
 
   public set(diffs: ParamObj): SearchParams {

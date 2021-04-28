@@ -55,7 +55,9 @@ export const stringify = ({
   (path || '/') + (search || '') + (hash || '')
 
 const nonEmpty = (obj: any) =>
-  Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined))
+  Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== undefined && v !== '')
+  )
 
 type Listener = { cb(): any }
 const listeners: Listener[] = []

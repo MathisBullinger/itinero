@@ -1,19 +1,24 @@
-import React, { useState } from 'react'
-import { matchPath, toRegex } from '../match'
+import React, { useMemo } from 'react'
+import { Matcher } from '../match'
 import { useLocation } from '../hooks'
 import type { Location } from '../location'
+import SearchParams, { ParamObj } from '../url/searchParams'
 
 type Props = {
   path: RegExp | string
-  match?: RegExpExecArray
+  match?: Record<string, string> | null
 }
 
 const Route: React.FC<Props> = ({ match, path, children }) => {
-  const [regex] = useState(typeof path === 'string' ? toRegex(path) : path)
+  const matcher = useMemo(() => new Matcher(path), [path])
   const location = useLocation()
-  const v = children && (match ?? matchPath(regex, location))
-  if (!v) return null
-  const props = { location, match: v.groups ?? {} }
+  match ??= matcher.match(location)
+  if (!match || !children) return null
+  const props = {
+    location,
+    match,
+    query: new SearchParams(location.search).content,
+  }
   if (!Array.isArray(children)) return renderChild(children, props)
   return (children as any[]).map((child, key) =>
     renderChild(child, { key, ...props })
@@ -34,4 +39,5 @@ export type RouteProps<
 > = T & {
   location: Location
   match: TM
+  query: ParamObj
 }

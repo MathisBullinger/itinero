@@ -14,3 +14,47 @@ export const subNamed = (v: string): string =>
 export const classes = {
   param: '\\w',
 }
+
+export class Matcher {
+  private readonly path?: RegExp
+  private readonly query?: RegExp
+
+  constructor(pattern: string | RegExp) {
+    if (typeof pattern !== 'string') {
+      this.path = pattern
+      return
+    }
+
+    const queryPart = /\?[^#</]+/.exec(pattern)
+    if (queryPart) {
+      pattern =
+        pattern.slice(0, queryPart.index) +
+        pattern.slice(queryPart.index + queryPart[0].length)
+
+      this.query = new RegExp(
+        queryPart[0]
+          .slice(1)
+          .split('&')
+          .map(v => `(?=.*[?&]${v})`)
+          .join(''),
+        'i'
+      )
+    }
+
+    if (pattern)
+      this.path = new RegExp(`^${subNamed(pattern.replace(/\/$/, ''))}/?$`, 'i')
+  }
+
+  public match(location: Location) {
+    let groups: Record<string, string> | null = {}
+
+    if (this.path) {
+      const pathMatch = this.path.exec(decodeURIComponent(location.path))
+      groups = pathMatch && (pathMatch.groups ?? {})
+    }
+
+    if (this.query && !this.query.test(location.search)) groups = null
+
+    return groups
+  }
+}
