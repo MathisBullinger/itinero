@@ -1,4 +1,5 @@
 import * as loc from './location'
+export { listen } from './location'
 
 type PushOpts = {
   replace?: boolean
