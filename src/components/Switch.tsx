@@ -8,7 +8,9 @@ const Switch: React.FC<{}> = ({ children }) => {
 
   const childList = React.Children.toArray(children)
     .filter(React.isValidElement)
-    .filter(({ props }) => 'path' in (props as any))
+    .filter(
+      ({ props, type }: any) => 'path' in (props as any) || type === Redirect
+    )
 
   for (const child of childList) {
     if (child.type === Redirect) return child
