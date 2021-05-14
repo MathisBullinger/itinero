@@ -1,6 +1,6 @@
 {
   "name": "@picast-app/router",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "private": "true",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
