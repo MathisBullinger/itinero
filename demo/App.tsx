@@ -58,6 +58,12 @@ function Home() {
       <Link className="bar small" to="?Jane=Doe&age=50">
         {'?(john|jane)=doe\\w*&age=d{1,3}(&|$)'}
       </Link>
+      <Link className="bar small" to="https://github.com" sameTab>
+        external link (same tab)
+      </Link>
+      <Link className="bar small" to="https://github.com" newTab>
+        external link (new tab)
+      </Link>
     </div>
   )
 }
