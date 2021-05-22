@@ -5,14 +5,15 @@ type Props = {
   to: string
   newTab?: boolean
   sameTab?: boolean
+  replace?: boolean
 }
 
 const Link: React.FC<
   Omit<React.HTMLProps<HTMLAnchorElement>, 'href'> & Props
-> = ({ children, to, newTab, sameTab, ...props }) => {
+> = ({ children, to, newTab, sameTab, replace = false, ...props }) => {
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault()
-    history.push(to)
+    history.push(to, { replace })
     cstClick?.(e)
   }
 
