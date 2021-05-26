@@ -22,7 +22,7 @@ const Link: React.FC<
   sameTab = !newTab
 
   const cstClick = props.onClick
-  if (cstClick && !external) delete props.onClick
+  if ('onClick' in props && !external) delete props.onClick
 
   return (
     <a
