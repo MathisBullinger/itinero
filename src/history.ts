@@ -21,6 +21,6 @@ window.addEventListener('popstate', () => {
   loc.update({
     search: '',
     hash: '',
-    ...loc.parse(window.location.href.slice(window.location.origin.length)),
+    ...loc.parse(location.href.slice(location.origin.length)),
   })
 })

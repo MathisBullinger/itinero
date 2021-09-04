@@ -8,9 +8,9 @@ export type Location = {
 }
 
 const location: Location = {
-  path: window.location.pathname || '/',
-  hash: window.location.hash,
-  search: window.location.search,
+  path: globalThis.location.pathname || '/',
+  hash: globalThis.location.hash,
+  search: globalThis.location.search,
   previous: null,
 }
 
