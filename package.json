@@ -2,8 +2,8 @@
   "name": "@picast-app/router",
   "version": "0.5.2",
   "private": "true",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "rm -rf lib && tsc -p tsconfig.json && cp package.json lib && rm lib/*.spec.*",
     "test": "jest",

@@ -1,5 +1,5 @@
 #!/bin/bash
 npm run build
-cd lib && jq 'del(.scripts,.private)' package.json > package.tmp
+cd lib && jq 'del(.scripts,.private)' package.json > package.tmp && cp ../.npmrc .
 mv package.tmp package.json
 npm publish --access public
