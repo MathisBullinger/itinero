@@ -1,6 +1,6 @@
 {
-  "name": "@picast-app/router",
-  "version": "0.5.2",
+  "name": "itinero",
+  "version": "0.6.0",
   "private": "true",
   "main": "index.js",
   "types": "index.d.ts",
