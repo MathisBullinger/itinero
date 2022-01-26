@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/picast-app/router.git"
+    "url": "https://github.com/MathisBullinger/itinero.git"
   },
   "author": "Mathis Bullinger",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/picast-app/router/issues"
+    "url": "https://github.com/MathisBullinger/itinero/issues"
   },
-  "homepage": "https://github.com/picast-app/router#readme",
+  "homepage": "https://github.com/MathisBullinger/itinero#readme",
   "peerDependencies": {
     "react": "^17.0.2"
   },
