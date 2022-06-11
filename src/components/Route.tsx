@@ -7,6 +7,7 @@ import SearchParams, { ParamObj } from '../url/searchParams'
 type Props = {
   path: RegExp | string
   match?: Record<string, string> | null
+  children?: React.ReactNode | React.FC<any> | React.Component<any>
 }
 
 const Route: React.FC<Props> = ({ match, path, children }) => {

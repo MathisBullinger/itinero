@@ -3,7 +3,7 @@ import { Matcher } from '../match'
 import { useLocation } from '../hooks'
 import Redirect from './Redirect'
 
-const Switch: React.FC<{}> = ({ children }) => {
+const Switch: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const location = useLocation()
 
   const childList = React.Children.toArray(children)
