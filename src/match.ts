@@ -12,7 +12,7 @@ export const subNamed = (v: string): string =>
   v.replace(/(\/:([a-z_]\w*))/g, `(?:\\/(?<$2>${classes.param}+))`)
 
 export const classes = {
-  param: '\\w',
+  param: "(?:[a-zA-Z0-9.\\-_~!$\\&'()*+,;=:@]|%[0-9A-F]{2})",
 }
 
 export class Matcher {
